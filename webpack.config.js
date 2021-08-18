@@ -2,7 +2,7 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+// const CopyPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
@@ -33,7 +33,13 @@ const esLintPlugin = isProd =>
       extensions: ['tsx', 'jsx', 'ts', 'js'] ,
       failOnError : true
     })]
-        : [];
+    : [new ESLintPlugin({
+      extensions: ['tsx', 'jsx', 'ts', 'js'] ,
+      threads: true,
+      emitError: true,
+      emitWarning: true,
+      failOnError: false
+    })];
 
 module.exports = {
   entry: './src/index.tsx',
@@ -74,9 +80,9 @@ module.exports = {
       title: "React-forms-task"
     }),
     new CleanWebpackPlugin(),
-    new CopyPlugin({
-        patterns: [{ from: 'public' }],
-    }),
+    // new CopyPlugin({
+    //     patterns: [{ from: 'public' }],
+    // }),
     ...esLintPlugin(isProd)
   ],
   resolve: {
