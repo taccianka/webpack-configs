@@ -31,7 +31,6 @@ module.exports = {
   },
   rules: {
     "prettier/prettier": "error",
-    "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "react/jsx-filename-extension": [ "warn", {"extensions": ['.jsx', ".tsx"]} ],
     "import/extensions": [
